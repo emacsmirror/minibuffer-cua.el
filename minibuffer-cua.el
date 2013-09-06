@@ -28,13 +28,19 @@
 ;; Author: Akinori MUSHA <knu@iDaemons.org>
 ;; URL: https://github.com/knu/minibuffer-cua.el
 ;; Created: 5 Sep 2013
-;; Version: 1.0.0.20130905
+;; Version: 1.0.0.20130906
 ;; Keywords: completion, editing
 
 ;;; Commentary:
 
 ;;; This module makes CUA mode's S-up/S-down selection movement work
 ;;; in minibuffer.
+;;;
+;;; Necessary key bindings are set up for minibuffer by calling
+;;; minibuffer-cua-setup.
+;;;
+;;; (require 'minibuffer-cua)
+;;; (minibuffer-cua-setup)
 
 ;;; Code:
 
@@ -66,7 +72,9 @@
   (local-set-key (kbd "S-<up>") 'minibuffer-cua-shift-previous-line))
 
 ;;;###autoload
-(add-hook 'minibuffer-setup-hook 'minibuffer-cua-define-keys)
+(defun minibuffer-cua-setup ()
+  "Enable S-up and S-down in minibuffer."
+  (add-hook 'minibuffer-setup-hook 'minibuffer-cua-define-keys))
 
 (provide 'minibuffer-cua)
 
